@@ -10,7 +10,9 @@
     "lint": "eslint --cache --format codeframe src/*.ts",
     "lint:fix": "eslint --fix --cache --format codeframe src/*.ts",
     "typecheck": "yarn ttsc --noEmit",
-    "prepublishOnly": "tsc"
+    "prepublishOnly": "tsc",
+    "ready": "npm run typecheck && npm run lint && npm test",
+    "commit": "git add . && git commit && git push"
   },
   "keywords": [
     "positional",
@@ -76,8 +78,7 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "pretty-quick --staged && npm run ready"
     }
   }
 }
